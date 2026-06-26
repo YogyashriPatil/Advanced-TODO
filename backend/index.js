@@ -91,6 +91,35 @@ app.post("/create-todo/:id", (req,res) => {
     })
 })
 
+app.put("/edit-towards", (req,res) => {
+    const id = Number(req.params.id);
+    const user = users.find(u => u.id === id);
+    console.log(user);
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found"
+        });
+    }
+    user.todo['status']='going'
+    res.json({
+        message:"Todo is working on"
+    })
+})
+
+app.put("/completed", (req,res) => {
+    const id = Number(req.params.id);
+    const user = users.find(u => u.id === id);
+    console.log(user);
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found"
+        });
+    }
+    user.todo['status']='completed'
+    res.json({
+        message:"Todo is working on"
+    })
+})
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 });
